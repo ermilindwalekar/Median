@@ -13,6 +13,20 @@
 
 size_t nPasses = 0;
 
+struct DataPointInfo
+{
+  int Value;
+  int low;
+  int high;
+  int nearestBelow;
+  int nearestAbove ;
+  size_t countBelow;
+  size_t countEqual ;
+  size_t countAbove ;
+};
+
+typedef struct DataPointInfo DataPointInfo;
+
 void Range(int *rgint, int *min, int *max, int n)
 {
     int i;
@@ -59,9 +73,7 @@ int median(int *array, int n)
 
     //First pass for do
     nPasses++;
-    DataPointInfo dpi = { .Value = (min + max) / 2, .low = min, .high = max , 
-        .nearestBelow = INT_MIN, .nearestAbove = INT_MAX, .countEqual = 0, .countBelow = 0,
-        .countAbove = 0};
+    DataPointInfo dpi = { .Value = (min + max) / 2, .low = min, .high = max};
     do
     {
         Counting(array, &dpi, n);
